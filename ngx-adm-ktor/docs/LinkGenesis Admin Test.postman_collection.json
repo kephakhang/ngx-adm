@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "8130d499-a511-44ca-943a-2b2d326ccce8",
+		"name": "LinkGenesis Admin Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18676698"
+	},
+	"item": [
+		{
+			"name": "add counter",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\":\"YPS-CT-070139\",\n  \"tenantId\":\"yps-own-kr\",\n  \"terminalId\":\"YPS-TR-003\",\n  \"version\":3,\n  \"status\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SERVER_URL}}/api/v1/counter",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"counter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get counter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_URL}}/api/v1/counter?id=YPS-CT-070101",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"",
+						"api",
+						"v1",
+						"counter"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "YPS-CT-070101"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get counter list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_URL}}/api/v1/counter/list?terminalId=YPS-TR-001",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"counter",
+						"list"
+					],
+					"query": [
+						{
+							"key": "terminalId",
+							"value": "YPS-TR-001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete counter",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_URL}}/api/v1/counter?id=YPS-CT-070101",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"counter"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "YPS-CT-070101"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update counter",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\":\"YPS-CT-070110\",\n  \"tenantId\":\"yps-own-kr\",\n  \"terminalId\":\"YPS-TR-001\",\n  \"version\":3,\n  \"status\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SERVER_URL}}/api/v1/counter",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"counter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get terminal list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzc286OjphdXRoZW50aWNhdGlvbiIsImF1ZCI6IllvdW5nUGx1c1NvZnQ6Ojp3ZWI6Ojptb2JpbGU6OjpjbGllbnQiLCJ1aWQiOiIwNmIyNzY1NS1hZThlLTQ5NzYtYmRkOS02ZTQ3NDBjZTE0NTAiLCJsZXZlbCI6MTAwMCwiaXNzIjoieW91bnBsdXNzb2Z0LmNvbSIsIm5hbWUiOiJLZXBoYSBLaGFuZyIsImV4cCI6MTY1NzE5MTcyMywianRpIjoiZGIxNzFkYWQtNDZiZC00NzA2LWFlYTYtMzhjMmI5ZDE5ZjY3Iiwic3RhdHVzIjowfQ.W5La3fN60ga2NMKIkNc-waPrpPDUPr5WYouE-OHIQkw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_URL}}/api/v1/terminal/list?salt=337",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"terminal",
+						"list"
+					],
+					"query": [
+						{
+							"key": "salt",
+							"value": "337"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

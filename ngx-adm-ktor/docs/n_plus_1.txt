@@ -1,0 +1,59 @@
+
+[N+1] queries
+SELECT counterlis0_.tr_id        AS tr_id7_12_0_,
+       counterlis0_.id           AS id1_12_0_,
+       counterlis0_.id           AS id1_12_1_,
+       counterlis0_.mod_datetime AS mod_date2_12_1_,
+       counterlis0_.reg_datetime AS reg_date3_12_1_,
+       counterlis0_.te_id        AS te_id4_12_1_,
+       counterlis0_.co_status    AS co_statu5_12_1_,
+       counterlis0_.co_version   AS co_versi6_12_1_,
+       counterlis0_.tr_id        AS tr_id7_12_1_
+FROM   tb_counter counterlis0_
+WHERE  counterlis0_.tr_id = 'YPS-TR-001';
+
+SELECT counterlis0_.tr_id        AS tr_id7_12_0_,
+       counterlis0_.id           AS id1_12_0_,
+       counterlis0_.id           AS id1_12_1_,
+       counterlis0_.mod_datetime AS mod_date2_12_1_,
+       counterlis0_.reg_datetime AS reg_date3_12_1_,
+       counterlis0_.te_id        AS te_id4_12_1_,
+       counterlis0_.co_status    AS co_statu5_12_1_,
+       counterlis0_.co_version   AS co_versi6_12_1_,
+       counterlis0_.tr_id        AS tr_id7_12_1_
+FROM   tb_counter counterlis0_
+WHERE  counterlis0_.tr_id = 'YPS-TR-002';
+
+SELECT counterlis0_.tr_id        AS tr_id7_12_0_,
+       counterlis0_.id           AS id1_12_0_,
+       counterlis0_.id           AS id1_12_1_,
+       counterlis0_.mod_datetime AS mod_date2_12_1_,
+       counterlis0_.reg_datetime AS reg_date3_12_1_,
+       counterlis0_.te_id        AS te_id4_12_1_,
+       counterlis0_.co_status    AS co_statu5_12_1_,
+       counterlis0_.co_version   AS co_versi6_12_1_,
+       counterlis0_.tr_id        AS tr_id7_12_1_
+FROM   tb_counter counterlis0_
+WHERE  counterlis0_.tr_id = 'YPS-TR-003';
+
+
+"hibernate.default_batch_fetch_size" = "500"
+[One more query for fetching sub table's rows]
+
+    /* load one-to-many com.youngplussoft.admin.server.jpa.own.entity.Terminal.counterList */
+    select
+        counterlis0_.tr_id as tr_id7_12_1_,
+        counterlis0_.id as id1_12_1_,
+        counterlis0_.id as id1_12_0_,
+        counterlis0_.mod_datetime as mod_date2_12_0_,
+        counterlis0_.reg_datetime as reg_date3_12_0_,
+        counterlis0_.te_id as te_id4_12_0_,
+        counterlis0_.co_status as co_statu5_12_0_,
+        counterlis0_.co_version as co_versi6_12_0_,
+        counterlis0_.tr_id as tr_id7_12_0_
+    from
+        tb_counter counterlis0_
+    where
+        counterlis0_.tr_id in (
+            'YPS-TR-001', 'YPS-TR-002', 'YPS-TR-003'
+        );
