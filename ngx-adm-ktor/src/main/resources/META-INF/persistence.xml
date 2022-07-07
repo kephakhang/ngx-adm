@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+    <persistence-unit name="admin">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <!--exclude-unlisted-classes>false</exclude-unlisted-classes-->
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Member</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.MemberDetail</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Admin</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Agent</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.AgentDetail</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Board</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.BoardFile</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.BoardGood</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.BoardNew</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.BoardWrite</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.BoardWriteDetail</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Company</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.CompanyMember</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Group</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Tenant</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Call</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Counter</class>
+        <class>com.youngplussoft.admin.server.jpa.own.entity.Terminal</class>
+        <properties>
+            <!-- 속성 설정 -->
+        </properties>
+    </persistence-unit>
+</persistence>

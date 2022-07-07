@@ -1,0 +1,12 @@
+<nb-card>
+  <nb-card-header>
+    Counters
+  </nb-card-header>
+
+  
+  <nb-card-body style="overflow: unset;">
+    <ng2-completer placeholder="{{tenantId}}" [datasource]="dataService" [minSearchLength]="0" (selected)="onSelectedChange($event)"></ng2-completer>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

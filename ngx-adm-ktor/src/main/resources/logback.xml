@@ -1,0 +1,99 @@
+<configuration>
+    <property name="LOG_ROOT" value="logs" />
+    <property name="LOG_FILE_NAME" value="run" />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="RUN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_ROOT}/${LOG_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_ROOT}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each archived file's size will be max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- 30 days to keep -->
+            <maxHistory>30</maxHistory>
+            <!-- total size of all archive files, if total size > 100GB, it will delete old archived file -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <if condition='"${RUN_ENV}".equals("local")' >
+        <then>
+            <root level="debug">
+                <appender-ref ref="STDOUT"/>
+                <appender-ref ref="RUN"/>
+            </root>
+            <logger name="org.eclipse.jetty" level="info">
+                <appender-ref ref="STDOUT"/>
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="io.netty" level="info">
+                <appender-ref ref="STDOUT"/>
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="org.apache" level="info">
+                <appender-ref ref="STDOUT"/>
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="com.mchange" level="info">
+                <appender-ref ref="STDOUT"/>
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="org.hibernate.SQL.type.trace" level="debug">
+                <appender-ref ref="STDOUT"/>
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="p6spy" level="info">
+                <appender-ref ref="STDOUT"/>
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="com.youngplussoft.admin" level="debug">
+                <appender-ref ref="STDOUT"/>
+                <appender-ref ref="RUN"/>
+            </logger>
+        </then>
+    </if>
+    <if condition='"${RUN_ENV}".equals("dev")' >
+        <then>
+            <root level="debug">
+                <appender-ref ref="RUN"/>
+            </root>
+            <logger name="org.eclipse.jetty" level="info">
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="io.netty" level="info">
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="org.apache" level="info">
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="com.mchange" level="info">
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="com.youngplussoft.admin" level="debug">
+                <appender-ref ref="RUN"/>
+            </logger>
+        </then>
+    </if>
+    <if condition='"${RUN_ENV}".equals("prod")' >
+        <then>
+            <root level="error">
+                <appender-ref ref="RUN"/>
+            </root>
+            <logger name="org.eclipse.jetty" level="info">
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="io.netty" level="info">
+                <appender-ref ref="RUN"/>
+            </logger>
+            <logger name="com.youngplussoft.admin" level="info">
+                <appender-ref ref="RUN"/>
+            </logger>
+        </then>
+    </if>
+</configuration>

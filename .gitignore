@@ -1,0 +1,111 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+# compiled output
+dist/
+tmp/
+out-tsc/
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+.idea/
+.project/
+.classpath/
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.angular/
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+.sass-cach/
+connect.lock
+coverage/
+libpeerconnection.log
+npm-debug.log
+testem.log
+typings/
+docs/
+
+# e2e
+e2e/*.js
+e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+*.tar
+
+*.iml
+*~
+*.sw[mnpcod]
+*.bak
+*.zip
+*.tar
+.tmp
+*.tmp
+*.tmp.*
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+
+*.zip
+*.log
+log.txt
+npm-debug.log*
+
+.gradle
+build/
+.ionic/
+.sass-cache/
+.sourcemaps/
+.versions/
+.vscode/
+coverage/
+node_modules/
+platforms/
+plugins/
+www/
+tmp/
+log/
+logs/
+
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+*.iml
+*~
+*.sw[mnpcod]
+*.bak
+*.zip
+*.tar
+.tmp
+*.tmp
+*.tmp.*
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+
+*.zip
+*.log
+log.txt
+npm-debug.log*
+
+.gradle
+
+

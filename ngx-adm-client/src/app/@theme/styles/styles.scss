@@ -1,0 +1,72 @@
+@import "~normalize.css";
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700,800&display=swap');
+
+// themes - our custom or/and out of the box themes
+@import "themes";
+
+// framework component themes (styles tied to theme variables)
+@import "~@nebular/theme/styles/globals";
+@import "~@nebular/auth/styles/globals";
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/grid";
+
+@import "./material/_angular-material";
+
+// loading progress bar theme
+@import "./pace.theme";
+
+@import "./layout";
+@import "./overrides";
+@import "./material/_material-overrides";
+
+// install the framework and custom global styles
+@include nb-install() {
+  @include angular-material();
+
+  // framework global styles
+  @include nb-theme-global();
+  @include nb-auth-global();
+
+  @include ngx-layout();
+  // loading progress bar
+  @include ngx-pace-theme();
+
+  @include nb-overrides();
+  @include material-overrides();
+}
+
+nb-tabset {
+  ul.tabset {
+    width: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    color: red;
+    justify-content: flex-start !important;
+  }
+}
+
+//ng2-completer dropdown holder
+ng2-completer {
+  input.completer-input {
+    color: var(--smart-table-fg2);
+    width: 100%;
+  }
+
+  input.completer-input:focus {
+    color: var(--smart-table-fg2);
+  }
+
+  div.completer-dropdown-holder {
+    .completer-dropdown {
+      width: 100%;
+      height: 10rem;
+      z-index: 9999;
+      overflow-y: scroll;
+      position: absolute;
+    }
+  }
+}

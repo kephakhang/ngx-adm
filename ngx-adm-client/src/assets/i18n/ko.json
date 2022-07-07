@@ -1,0 +1,23 @@
+{
+    "__lang": "Korean",
+    "auth": {
+
+        "login": {
+            "greeting": "안녕하세요 !!! 이메일 또는 핸드폰 번호로 로그인 해 주세요 !!!",
+            "greetingEmailOnly": "안녕하세요 !!! 이메일로 로그인 해 주세요 !!!."
+
+        },
+        "logout": {
+
+        },
+        "register": {
+
+        },
+        "request": {
+
+        },
+        "reset": {
+
+        }
+    }
+}
