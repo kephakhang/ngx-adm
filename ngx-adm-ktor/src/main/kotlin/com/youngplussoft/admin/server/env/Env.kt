@@ -105,7 +105,7 @@ class Env {
             dbConfig["hibernate.show_sql"] = "true"
             dbConfig["hibernate.format_sql"] = "true"
             dbConfig["hibernate.use_sql_comments"] = "true"
-//            dbConfig["hibernate.default_batch_fetch_size"] = "500"
+            dbConfig["hibernate.default_batch_fetch_size"] = "500"
             dbConfig["hibernate.jdbc.fetch_size"] = "300"
             dbConfig["hibernate.jdbc.batch_size"] = "300"
             dbConfig["hibernate.id.new_generator_mappings"] = "false"
