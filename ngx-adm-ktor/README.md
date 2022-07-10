@@ -68,8 +68,13 @@
 - tb_company
 - tb_company_member
 
+### licenses
+
+- All of this source is originated and owned by Kepha(kepha@youngplussoft.com)
+- But this source is under MIT license bacause Kepha support MIT license (https://github.com/peterkhang/ngx-adm/tree/master/ngx-adm-ktor/LICENSE)
+
 <br/>
--  실행 명령 :  gradle -Pprofile=local run
+-  실행 명령 :  ./start.sh
 
 <br/>
 -  혹시 소스에 문의사항이 있으시면 저(Kepha)에게 DM  이나 메일 주세요 ~~~

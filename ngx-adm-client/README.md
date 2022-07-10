@@ -40,5 +40,10 @@
 - yarn build: development 빌드 명령
 - yarn start : SPA(ngx-adm-client) 실행 명령
 
+### License
+
+- This source is based on nebular ngx-admin (https://github.com/akveo/nebular) and modified by Kepha(kepha@youngplussoft.com)
+- This source is also under MIT licenses (https://github.com/peterkhang/ngx-adm/blob/master/ngx-adm-client/LICENSE)
+
 <br/>
 -  혹시 소스에 문의사항이 있으시면 저(Kepha)에게 DM  이나 메일 주세요 ~~~
