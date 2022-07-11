@@ -71,7 +71,7 @@
 ### licenses
 
 - All of this source is originated and owned by Kepha(kepha@youngplussoft.com)
-- But this source is under MIT license bacause Kepha support MIT license (https://github.com/peterkhang/ngx-adm/tree/master/ngx-adm-ktor/LICENSE)
+- This source is under MIT license (https://github.com/peterkhang/ngx-adm/tree/master/ngx-adm-ktor/LICENSE)
 
 <br/>
 -  실행 명령 :  ./start.sh
