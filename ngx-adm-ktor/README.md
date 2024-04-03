@@ -1,5 +1,7 @@
 # ngx-server
 
+### [실행 절차 설명](https://www.notion.so/kephakhang/ngx-adm-ad1e83e1fa9940f4b7624b0f7b32637e)
+
 ### [개발 및 실행 환경]
 
 - jdk=corretto-11.0.11(AWS openJDK 11)

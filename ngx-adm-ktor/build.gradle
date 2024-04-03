@@ -41,7 +41,7 @@ apply plugin: "application"
 
 
 group "com.YoungPlusSoft"
-version "0.0.1"
+version "1.0.0"
 mainClassName = "io.ktor.server.jetty.EngineMain"
 
 repositories {
@@ -51,7 +51,8 @@ repositories {
     maven { url = uri("https://plugins.gradle.org/m2/") }
     maven { url = uri("https://oss.jfrog.org/oss-snapshot-local/") }
     maven { url = uri("https://github.com/ktorio/ktor") }
-    maven { url = uri("https://repo.sultanofcardio.com/artifactory/sultanofcardio") }
+    maven { url = uri("https://jcenter.bintray.com/")}
+//    maven { url = uri("https://repo.sultanofcardio.com/artifactory/sultanofcardio") }
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 
 }
@@ -137,7 +138,9 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:$fasterxml_version")
 
     implementation "org.hibernate.ogm:hibernate-ogm-redis:$ogm_redis_version"
-    implementation "com.sultanofcardio:mailman:$mail_version"
+    implementation("javax.mail:javax.mail-api:1.6.2")
+    implementation("com.sun.mail:javax.mail:1.6.2")
+//    implementation "com.sultanofcardio:mailman:$mail_version"
     implementation "org.mindrot:jbcrypt:$jbcrypt_version"
     implementation "p6spy:p6spy:$p6spy_version"
     implementation "com.google.code.gson:gson:$gson_version"
@@ -181,13 +184,13 @@ dependencies {
 
 compileKotlin {
     kotlinOptions.freeCompilerArgs = ["-Xuse-experimental=kotlin.Experimental"]
-//    kotlinOptions.jvmTarget = 11
+    kotlinOptions.jvmTarget = 11
 }
 
 import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
 
 shadowJar {
-    baseName = "ngx-server"
+    baseName = "ngx-adm-ktor"
     classifier = null
     version = null
     transform(ServiceFileTransformer) {
