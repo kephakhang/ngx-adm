@@ -25,7 +25,10 @@ data class CounterDto(
     val regDatetime: String? = null,
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    val modDatetime: String? = null
+    val modDatetime: String? = null,
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    val delDatetime: String? = null
 
     ): BasetDto<Counter>() {
 
@@ -38,8 +41,9 @@ data class CounterDto(
             trId = dto.terminalId
             coVersion = dto.version
             coStatus = dto.status
-            regDatetime = null
-            modDatetime = null
+            createdAt = null
+            updatedAt = null
+            deletedAt = null
         }
     }
 }

@@ -65,8 +65,8 @@ open class Tenant (
 //  @ApiModelProperty("등록시각")
   @CreationTimestamp
   @Convert(converter  = LocalDateTimeSerializer::class)
-  @Column(name = "reg_datetime", columnDefinition = "DATETIME", nullable = false, updatable = false)
-  var regDatetime: LocalDateTime? = null,
+  @Column(name = "created_at", columnDefinition = "DATETIME", nullable = false, updatable = false)
+  var createdAt: LocalDateTime? = null,
 
   /**
    * 변경시각
@@ -74,8 +74,18 @@ open class Tenant (
 //  @ApiModelProperty("수정시각")
   @UpdateTimestamp
   @Convert(converter  = LocalDateTimeSerializer::class)
-  @Column(name = "mod_datetime", columnDefinition = "DATETIME", nullable = false)
-  var modDatetime: LocalDateTime? = null
+  @Column(name = "updated_at", columnDefinition = "DATETIME", nullable = false)
+  var updatedAt: LocalDateTime? = null,
+
+  /**
+   * 삭제시각
+   */
+//  @ApiModelProperty("수정시각")
+  @Convert(converter  = LocalDateTimeSerializer::class)
+  @Column(name = "deleted_at", columnDefinition = "DATETIME", nullable = true)
+  var deletedAt: LocalDateTime? = null
+
+
 
 )  {
 
@@ -89,8 +99,9 @@ open class Tenant (
       prefix = prefix,
       hostname = hostname,
       countryCode = countryId,
-      regDatetime =  DateUtil.localDatetimeToStr(regDatetime),
-      modDatetime = DateUtil.localDatetimeToStr(modDatetime)
+      regDatetime =  DateUtil.localDatetimeToStr(createdAt),
+      modDatetime = DateUtil.localDatetimeToStr(updatedAt),
+      delDatetime = DateUtil.localDatetimeToStr(deletedAt)
     )
   }
 }

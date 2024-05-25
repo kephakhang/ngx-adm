@@ -47,6 +47,9 @@ data class UserDto(
     val modDatetime: String? = null,
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    val delDatetime: String? = null,
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     val detail: UserDetailDto? = null
 ) : Principal, BasetDto<Member>()  {
 
@@ -68,8 +71,9 @@ data class UserDto(
             mbLevel = level
             mbStatus = status
             mbPoint = point
-            regDatetime = null
-            modDatetime = null
+            createdAt = null
+            updatedAt = null
+            deletedAt = null
             detail = dto.detail?.toEntity()
         }
     }
@@ -85,8 +89,9 @@ data class UserDto(
             amName = dto.name
             amLevel = dto.level
             amStatus = dto.status
-            regDatetime = null
-            modDatetime = null
+            createdAt = null
+            updatedAt = null
+            deletedAt = null
         }
     }
 }

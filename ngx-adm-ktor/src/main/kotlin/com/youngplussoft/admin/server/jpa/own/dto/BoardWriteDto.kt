@@ -19,7 +19,10 @@ data class BoardWriteDto (
     val regDatetime: String? = null,
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    val modDatetime: String? = null
+    val modDatetime: String? = null,
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    val delDatetime: String? = null
 
 ): BasetDto<BoardWrite>() {
 

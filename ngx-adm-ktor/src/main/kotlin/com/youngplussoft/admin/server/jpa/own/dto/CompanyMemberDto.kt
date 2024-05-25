@@ -18,7 +18,10 @@ data class CompanyMemberDto (
     val regDatetime: String? = null,
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    val modDatetime: String? = null
+    val modDatetime: String? = null,
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    val delDatetime: String? = null
 
     ): BasetDto<CompanyMember>() {
 
@@ -28,8 +31,9 @@ data class CompanyMemberDto (
         )
         entity.id = dto.id
         entity.teId = dto.tenantId
-        entity.regDatetime = null
-        entity.modDatetime = null
+        entity.createdAt = null
+        entity.updatedAt = null
+        entity.deletedAt = null
 
         return entity
     }

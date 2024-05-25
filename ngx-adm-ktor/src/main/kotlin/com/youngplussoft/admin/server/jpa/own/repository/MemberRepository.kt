@@ -50,7 +50,7 @@ class MemberRepository : Querydsl4RepositorySupport<Member>(Env.em, Member::clas
       .set(member.mbName, userUpdateDto.name)
       .set(member.mbLevel, userUpdateDto.level)
       .set(member.teId, userUpdateDto.tenantId)
-      .set(member.modDatetime, LocalDateTime.now(Clock.systemUTC()))
+      .set(member.updatedAt, LocalDateTime.now(Clock.systemUTC()))
       .where(member.id.eq(userUpdateDto.id)).execute()
   }
 }

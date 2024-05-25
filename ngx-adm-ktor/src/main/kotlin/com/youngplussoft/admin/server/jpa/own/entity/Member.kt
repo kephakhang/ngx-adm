@@ -57,8 +57,9 @@ open class Member(
       level = mbLevel,
       status = mbStatus,
       point = mbPoint,
-      regDatetime = DateUtil.localDatetimeToStr(regDatetime),
-      modDatetime = DateUtil.localDatetimeToStr(modDatetime),
+      regDatetime = DateUtil.localDatetimeToStr(createdAt),
+      modDatetime = DateUtil.localDatetimeToStr(updatedAt),
+      delDatetime = DateUtil.localDatetimeToStr(deletedAt),
       detail = detail?.toDto()
     )
   }

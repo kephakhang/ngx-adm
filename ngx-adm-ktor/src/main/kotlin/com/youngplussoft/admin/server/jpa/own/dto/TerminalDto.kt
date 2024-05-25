@@ -31,6 +31,9 @@ data class TerminalDto(
     val modDatetime: String? = null,
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    val delDatetime: String? = null,
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     val counterList: MutableList<CounterDto> = listOf<CounterDto>().toMutableList()
 
     ): BasetDto<Terminal>()   {
@@ -44,8 +47,9 @@ data class TerminalDto(
             trVersion = dto.version
             trStatus = dto.status
             trIp = dto.ip
-            regDatetime = null
-            modDatetime = null
+            createdAt = null
+            updatedAt = null
+            deletedAt = null
             counterList = dto.counterList.map{it -> it.toEntity()}.toMutableList()
         }
     }

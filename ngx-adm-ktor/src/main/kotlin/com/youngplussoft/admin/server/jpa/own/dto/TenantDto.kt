@@ -31,7 +31,10 @@ data class TenantDto(
     val regDatetime: String? = null,
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    val modDatetime: String? = null
+    val modDatetime: String? = null,
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    val delDatetime: String? = null
 
     ): BasetDto<Tenant>()  {
 
@@ -51,8 +54,9 @@ data class TenantDto(
             enable = true
             prefix = dto.prefix
             hostname = dto.hostname
-            regDatetime = null
-            modDatetime = null
+            createdAt = null
+            updatedAt = null
+            deletedAt = null
         }
     }
 }

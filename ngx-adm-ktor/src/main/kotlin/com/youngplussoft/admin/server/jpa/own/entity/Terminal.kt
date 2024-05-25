@@ -37,8 +37,8 @@ open class Terminal (
       version = trVersion,
       status = trStatus,
       ip = trIp,
-      regDatetime =  DateUtil.localDatetimeToStr(regDatetime),
-      modDatetime = DateUtil.localDatetimeToStr(modDatetime),
+      regDatetime =  DateUtil.localDatetimeToStr(createdAt),
+      modDatetime = DateUtil.localDatetimeToStr(updatedAt),
       counterList = counterList.map{it -> it.toDto()}.toMutableList()
     )
   }

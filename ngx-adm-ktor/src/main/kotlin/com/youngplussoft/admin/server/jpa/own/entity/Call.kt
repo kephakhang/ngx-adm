@@ -45,8 +45,9 @@ open class Call (
       method = caMethod,
       requestBody = Env.gson.fromJson(caRequestBody, PostBody::class.java),
       responseBody = Env.gson.fromJson(caResponseBody, PostBody::class.java),
-      regDatetime =  DateUtil.localDatetimeToStr(regDatetime),
-      modDatetime = DateUtil.localDatetimeToStr(modDatetime)
+      regDatetime =  DateUtil.localDatetimeToStr(createdAt),
+      modDatetime = DateUtil.localDatetimeToStr(updatedAt),
+      delDatetime = DateUtil.localDatetimeToStr(deletedAt)
     )
   }
 }

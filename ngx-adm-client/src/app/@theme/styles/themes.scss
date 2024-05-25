@@ -4,9 +4,9 @@
 @import "~@angular/material/prebuilt-themes/purple-green.css";
 
 // @nebular theming framework
-@import "~@nebular/theme/styles/theming";
+@import "~@nebular/theme/styles/_theming";
 // @nebular out of the box themes
-@import "~@nebular/theme/styles/themes";
+@import "~@nebular/theme/styles/_themes";
 // material themes
 @import "./material/_material-dark";
 @import "./material/_material-light";

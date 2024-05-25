@@ -112,8 +112,9 @@ open class Admin(
       name = amName,
       level = amLevel,
       status = amStatus,
-      regDatetime = DateUtil.localDatetimeToStr(regDatetime),
-      modDatetime = DateUtil.localDatetimeToStr(modDatetime)
+      regDatetime = DateUtil.localDatetimeToStr(createdAt),
+      modDatetime = DateUtil.localDatetimeToStr(updatedAt),
+      delDatetime = DateUtil.localDatetimeToStr(deletedAt)
     )
   }
 }

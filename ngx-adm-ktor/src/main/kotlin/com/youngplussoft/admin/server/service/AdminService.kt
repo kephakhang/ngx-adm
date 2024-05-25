@@ -41,8 +41,8 @@ class AdminService(val db: AdminRepository): BaseService<Admin>(db) {
       amPassword = BcryptHasher.hashPassword(signup.password)
       amLevel = UserLevel.ADMIN.no
       amStatus = AdminStatus.CERTIFIED.no
-      regDatetime = now
-      modDatetime = now
+      createdAt = now
+      updatedAt = now
     }
 
     db.transaction {
