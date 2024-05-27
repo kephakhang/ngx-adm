@@ -18,12 +18,16 @@ import com.youngplussoft.admin.server.service.*
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import io.ktor.client.*
 import io.ktor.http.*
+import io.ktor.network.tls.certificates.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
+import io.ktor.server.engine.*
 import io.ktor.server.http.content.*
+import io.ktor.server.jetty.*
 import io.ktor.server.locations.*
 import io.ktor.server.plugins.cachingheaders.*
 import io.ktor.server.plugins.callid.*
@@ -43,17 +47,52 @@ import io.ktor.util.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import mu.KotlinLogging
+import org.slf4j.LoggerFactory
+import java.io.File
 import java.time.Duration
 import java.time.ZonedDateTime
-import kotlin.concurrent.thread
+import org.slf4j.*
+import java.io.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.jetty.EngineMain.main(args)
 
 private val logger = KotlinLogging.logger {}
 
-@KtorExperimentalAPI
+
 @Suppress("unused") // Referenced in application.conf
-@kotlin.jvm.JvmOverloads
+//@kotlin.jvm.JvmOverloads
+fun main() {
+
+    val keyStoreFile = File("jks/key-test.jks")
+    val keyStore = buildKeyStore {
+        certificate("testAlias") {
+            password = "test"
+//            domains = listOf("127.0.0.1", "0.0.0.0", "localhost")
+        }
+    }
+    keyStore.saveToFile(keyStoreFile, "test")
+
+    val environment = applicationEngineEnvironment {
+        log = LoggerFactory.getLogger("ktor.application")
+
+        connector {
+            port = 8080
+        }
+        sslConnector(
+            keyStore = keyStore,
+            keyAlias = "testAlias",
+            keyStorePassword = { "test".toCharArray() },
+            privateKeyPassword = { "test".toCharArray() }) {
+            port = 8443
+            keyStorePath = keyStoreFile
+        }
+        module(Application::module)
+    }
+
+    embeddedServer(Jetty, environment).start(wait = true)
+}
+
+
 fun Application.module(testing: Boolean = false) {
 
     val applicable: Boolean =

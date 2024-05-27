@@ -22,7 +22,7 @@ fun Route.user(userService: UserService) {
     }
 
     get("/api/v1/user/list") {
-        aop(call, UserLevel.YoungPlusSoft.no) {
+        aop(call, null /* UserLevel.YoungPlusSoft.no */) {
             val pageno = call.request.queryParameters["pageno"]?.toLong() ?: 1L
             val size = call.request.queryParameters["size"]?.toLong() ?: 300L
             val list: List<UserDto> = userService.getListByLevel(it!!.level, pageno, size).map{it.toDto()}.toList()

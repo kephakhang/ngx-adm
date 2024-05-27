@@ -93,6 +93,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$kotlinx_version"
     implementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_plugin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlin_serialization_version"
+    implementation "io.ktor:ktor-network-tls-certificates:$ktor_version"
 
     implementation "org.hibernate:hibernate-core:$hibernate_version"
     implementation "org.hibernate:hibernate-entitymanager:$hibernate_version"
