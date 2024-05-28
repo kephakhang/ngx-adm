@@ -56,7 +56,7 @@ open class Tenant (
   var prefix: String = "",
 
   @Column(name = "hostname", nullable = false)
-  var hostname: String = "", // auto genrated hostnam by OEM hostname naming rule
+  var hostname: String = "", // auto genrated hostname by OEM hostname naming rule
 
 
   /**
