@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.35, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
 -- Host: localhost    Database: admin
 -- ------------------------------------------------------
--- Server version	8.0.35-0ubuntu0.20.04.1
+-- Server version	8.0.36-0ubuntu0.20.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -98,12 +98,13 @@ CREATE TABLE `tb_admin` (
   `am_registrant_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '등록자 admin ID',
   `am_modifier_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '수정자 admin ID',
   `am_detail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Bory Inc.' COMMENT '관리자 상세정보',
-  `reg_datetime` datetime NOT NULL COMMENT '등록 일시',
-  `mod_datetime` datetime NOT NULL COMMENT '수정 일시',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `am_email_hash` (`am_email_hash`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `am_status` (`am_status`),
   KEY `am_level` (`am_level`),
   KEY `te_id` (`te_id`),
@@ -137,13 +138,14 @@ CREATE TABLE `tb_agent` (
   `ag_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ag_status` int NOT NULL DEFAULT '0' COMMENT '상태 flag(-3: blocked, -2: withdrawal, -1: dormant, 0:wait, 1:agent-otp-ceritified)',
   `ag_level` int NOT NULL DEFAULT '100' COMMENT '레벨 flag(100:agent user, 101:agent admin',
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ag_email_hash` (`ag_email_hash`),
   UNIQUE KEY `ag_mobile_hash` (`ag_mobile_hash`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `ag_status` (`ag_status`),
   KEY `ag_level` (`ag_level`),
   KEY `te_id` (`te_id`),
@@ -185,13 +187,9 @@ CREATE TABLE `tb_agent_detail` (
   `ag_charge_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '과금 부과 기관 사용자 명',
   `ag_charge_org` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '과금 부과 기관',
   `ag_charge_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
   UNIQUE KEY `ag_id` (`ag_id`),
   KEY `te_id` (`te_id`),
   KEY `ag_charge_id` (`ag_charge_id`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
   CONSTRAINT `tb_agent_detail_ibfk_1` FOREIGN KEY (`ag_id`) REFERENCES `tb_agent` (`id`) ON DELETE SET NULL,
   CONSTRAINT `tb_agent_detail_ibfk_2` FOREIGN KEY (`te_id`) REFERENCES `tb_tenant` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='대행사 상세';
@@ -312,12 +310,13 @@ CREATE TABLE `tb_board` (
   `bo_8` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `bo_9` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `bo_10` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `bo_table` (`bo_table`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `te_id` (`te_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -354,12 +353,13 @@ CREATE TABLE `tb_board_file` (
   `bf_height` int NOT NULL,
   `bf_status` int NOT NULL DEFAULT '1' COMMENT '0:deleted, 1:use',
   `bf_ext` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'jpg, git, png, mp3, mp4, pdf...',
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `bo_id` (`bo_id`,`wr_id`,`bf_no`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `te_id` (`te_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -387,12 +387,13 @@ CREATE TABLE `tb_board_good` (
   `wr_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `mb_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `bg_flag` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `bo_id` (`bo_id`,`wr_id`,`mb_id`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `te_id` (`te_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -420,12 +421,13 @@ CREATE TABLE `tb_board_new` (
   `wr_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `wr_parent` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `mb_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `mb_id` (`mb_id`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `te_id` (`te_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -465,12 +467,13 @@ CREATE TABLE `tb_board_write` (
   `wr_good` int NOT NULL DEFAULT '0',
   `wr_nogood` int NOT NULL DEFAULT '0',
   `wr_file` int NOT NULL DEFAULT '0',
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `bo_id` (`bo_id`,`wr_num`,`wr_reply`,`wr_parent`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `te_id` (`te_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -545,11 +548,12 @@ CREATE TABLE `tb_call` (
   `ca_method` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ca_request_body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `ca_response_body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `reg_datetime` datetime NOT NULL,
-  `mod_datetime` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   `ca_ip` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `tb_call_mod_datetime_index` (`mod_datetime`),
+  KEY `tb_call_mod_datetime_index` (`updated_at`),
   KEY `tb_call_request_id_uri_index` (`ca_request_id`,`ca_uri`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='call log table';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -591,14 +595,15 @@ CREATE TABLE `tb_company` (
   `co_latitude` double DEFAULT NULL,
   `co_longitude` double DEFAULT NULL,
   `co_homepage` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '대행사 홈페이지',
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ag_id` (`ag_id`),
   KEY `mb_id` (`mb_id`),
   KEY `te_id` (`te_id`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `co_status` (`co_status`),
   CONSTRAINT `tb_company_ibfk_1` FOREIGN KEY (`ag_id`) REFERENCES `tb_agent` (`id`) ON DELETE SET NULL,
   CONSTRAINT `tb_company_ibfk_2` FOREIGN KEY (`mb_id`) REFERENCES `tb_member` (`id`) ON DELETE SET NULL,
@@ -630,15 +635,16 @@ CREATE TABLE `tb_company_member` (
   `cm_otp` varchar(32) DEFAULT NULL COMMENT 'OTP 암호',
   `cm_status` int NOT NULL DEFAULT '0' COMMENT '상태 flag(-3: blocked, -2: withdrawal, -1: dormant, 0:wait, 1:company-otp-ceritified)',
   `cm_level` int NOT NULL DEFAULT '10' COMMENT '레벨 flag(0:guest, 10:co member, 11:co manager, 12:co admin)',
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `co_mb_uidx` (`co_id`,`mb_id`),
   KEY `co_id` (`co_id`),
   KEY `mb_id` (`mb_id`),
   KEY `te_id` (`te_id`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `cm_status` (`cm_status`),
   KEY `cm_level` (`cm_level`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -688,11 +694,12 @@ CREATE TABLE `tb_counter` (
   `id` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `te_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `old_te_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `tr_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'Terminal Id',
+  `tr_id` varchar(36) COLLATE utf8mb4_general_ci NOT NULL,
   `co_version` int NOT NULL DEFAULT '3' COMMENT 'Counter Version',
   `co_status` int NOT NULL DEFAULT '0' COMMENT 'Counter Status',
-  `reg_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `mod_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `te_id` (`te_id`),
   KEY `tr_id` (`tr_id`)
@@ -705,6 +712,7 @@ CREATE TABLE `tb_counter` (
 
 LOCK TABLES `tb_counter` WRITE;
 /*!40000 ALTER TABLE `tb_counter` DISABLE KEYS */;
+INSERT INTO `tb_counter` VALUES ('yps-co-1','yps-own-kr',NULL,'1dab1708-1cfe-4161-a719-261cdb0e73d8',1,0,'2024-05-28 15:34:29','2024-05-28 15:34:29',NULL),('yps-co-2','yps-own-kr',NULL,'1dab1708-1cfe-4161-a719-261cdb0e73d8',1,0,'2024-05-28 15:34:40','2024-05-28 15:34:40',NULL),('yps-co-3','yps-own-kr',NULL,'1dab1708-1cfe-4161-a719-261cdb0e73d8',1,0,'2024-05-28 15:34:48','2024-05-28 15:34:48',NULL),('yps-co-4','yps-own-kr',NULL,'1dab1708-1cfe-4161-a719-261cdb0e73d8',1,0,'2024-05-28 15:34:55','2024-05-28 15:34:55',NULL),('yps-co-5','yps-own-kr',NULL,'1dab1708-1cfe-4161-a719-261cdb0e73d8',1,0,'2024-05-28 15:35:02','2024-05-28 15:35:02',NULL),('yps-co-6','yps-own-kr',NULL,'1dab1708-1cfe-4161-a719-261cdb0e73d8',1,0,'2024-05-28 15:35:08','2024-05-28 15:35:08',NULL),('yps-co-7','yps-own-kr',NULL,'1dab1708-1cfe-4161-a719-261cdb0e73d8',1,0,'2024-05-28 15:35:14','2024-05-28 15:35:14',NULL);
 /*!40000 ALTER TABLE `tb_counter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -769,12 +777,13 @@ CREATE TABLE `tb_group` (
   `gr_8` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `gr_9` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `gr_10` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `reg_datetime` datetime NOT NULL COMMENT '등록시각',
-  `mod_datetime` datetime NOT NULL COMMENT '변경시각',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `gr_name` (`gr_name`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `te_id` (`te_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -805,16 +814,17 @@ CREATE TABLE `tb_member` (
   `mb_level` int NOT NULL DEFAULT '0' COMMENT 'member level(0:guest, 1:user, 10:company, 11:company user, 30:agent, 31:agent user, 1000:admin',
   `mb_point` bigint NOT NULL DEFAULT '0' COMMENT 'member point value',
   `mb_status` int NOT NULL DEFAULT '0' COMMENT 'member email or mobile certification flag(-3: blocked, -2: withdrawal, -1: dormant, 0:wait for certification, 1:email-only, 2:mobile-only, 3:both)',
-  `reg_datetime` datetime NOT NULL,
-  `mod_datetime` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   `mb_jwt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mb_email_hash` (`mb_email_hash`),
   UNIQUE KEY `mb_email_hash_2` (`mb_email_hash`),
   KEY `mb_status` (`mb_status`),
   KEY `mb_level` (`mb_level`),
-  KEY `reg_datetime` (`reg_datetime`),
-  KEY `mod_datetime` (`mod_datetime`),
+  KEY `reg_datetime` (`created_at`),
+  KEY `mod_datetime` (`updated_at`),
   KEY `te_id` (`te_id`),
   CONSTRAINT `tb_member_ibfk_1` FOREIGN KEY (`te_id`) REFERENCES `tb_tenant` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -826,7 +836,7 @@ CREATE TABLE `tb_member` (
 
 LOCK TABLES `tb_member` WRITE;
 /*!40000 ALTER TABLE `tb_member` DISABLE KEYS */;
-INSERT INTO `tb_member` VALUES ('b6f7a14f-3131-4957-93c4-6462f328de9f','emoldino-own-kr','bb0eed9f1269b20c9150d9f195ecd290f5b13f09dce95dc7aaf604e5f30e89e2','b57944c183598bb995c674271cf3cf7b71835ef6eb91f1b09208582de5d06f64','$2a$10$r7DmEv5V95EkfVEDDVq/pOncZDZ9NStbKt/fz2CPldiKM2AScWrcu','Kepha Khang',1000,0,0,'2022-05-13 05:14:35','2022-05-13 05:14:35',NULL);
+INSERT INTO `tb_member` VALUES ('b6f7a14f-3131-4957-93c4-6462f328de9f','emoldino-own-kr','bb0eed9f1269b20c9150d9f195ecd290f5b13f09dce95dc7aaf604e5f30e89e2','b57944c183598bb995c674271cf3cf7b71835ef6eb91f1b09208582de5d06f64','$2a$10$r7DmEv5V95EkfVEDDVq/pOncZDZ9NStbKt/fz2CPldiKM2AScWrcu','Kepha Khang',1000,0,0,'2022-05-13 05:14:35','2022-05-13 05:14:35',NULL,NULL);
 /*!40000 ALTER TABLE `tb_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -921,11 +931,12 @@ CREATE TABLE `tb_tenant` (
   `country_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `host_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `enable` bit(1) NOT NULL DEFAULT b'1',
-  `reg_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `mod_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   `prefix` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `hostname` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Auto generated hostname for each OEM',
   `timezone` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'UTC' COMMENT 'MMS Server data timezone',
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tenant_name_country_uindex` (`name`,`country_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='tenant table';
@@ -937,12 +948,39 @@ CREATE TABLE `tb_tenant` (
 
 LOCK TABLES `tb_tenant` WRITE;
 /*!40000 ALTER TABLE `tb_tenant` DISABLE KEYS */;
+INSERT INTO `tb_tenant` VALUES ('yps-own-kr','YoungPlusSoft-KR',0,'YoungPlusSoft Own Tenant',NULL,NULL,NULL,'KR','http://localhost:8080',_binary '','2024-05-28 15:21:27','2024-05-28 15:21:27','yps','YPS','UTC',NULL);
 /*!40000 ALTER TABLE `tb_tenant` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'admin'
+-- Table structure for table `tb_terminal`
 --
+
+DROP TABLE IF EXISTS `tb_terminal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_terminal` (
+  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `te_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tr_ip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tr_status` int NOT NULL,
+  `tr_version` int NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_terminal`
+--
+
+LOCK TABLES `tb_terminal` WRITE;
+/*!40000 ALTER TABLE `tb_terminal` DISABLE KEYS */;
+INSERT INTO `tb_terminal` VALUES ('1dab1708-1cfe-4161-a719-261cdb0e73d8','2024-05-28 15:30:19','2024-05-28 15:30:19','yps-own-kr','127.0.0.1',1,1,NULL);
+/*!40000 ALTER TABLE `tb_terminal` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -953,4 +991,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-02 21:18:25
+-- Dump completed on 2024-05-28 15:38:00
